@@ -12,6 +12,7 @@ router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
 //@route   GET /auth/google/callback
 //If fails redirect to route if passes redirect to dashboard
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
+    console.log(req.user)
     res.redirect('/dashboard')
 })
 

@@ -5,6 +5,10 @@ const dotenv = require('dotenv');
 
 const session = require('express-session');
 
+const mongoose = require('mongoose');
+// Storing User in session so that app stays logged in 
+//when making changes on the server and server restart
+const MongoStore = require('connect-mongo')(session);
 // Console logs requests
 const morgan = require('morgan');
 // Handle Bars
@@ -42,6 +46,8 @@ app.use(session({
     resave: false,
     //dont create a session unles something is stored
     saveUninitialized: false,
+    // Stores login in MongoDB so user stays logged in even during server changes
+    store:new MongoStore({ mongooseConnection: mongoose.connection})
   }))
 
 //Passport middleware
@@ -58,5 +64,4 @@ app.use('/auth', require('./routes/auth'))
 
 
 const PORT = process.env.PORT || 3000
-
 app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`))
