@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    {{> _header}}
     <div class="container">
     {{{body}}}
     </div>
@@ -24,6 +25,11 @@
     {{!-- Materialize --}}
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+ {{!--Initialize the nav bar (have to with materialize) --}} 
+    <script>
+        M.Sidenav.init(document.querySelector('.sidenav'))
+    </script>
 </body>
 
 </html>
