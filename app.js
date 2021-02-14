@@ -104,17 +104,6 @@ app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
 app.use('/stories', require('./routes/stories'))
 
-// Port number
-const PORT = process.env.PORT || 3000;
 
-mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/workout',
- {
-   useNewUrlParser: true,
-   useUnifiedTopology: true,
-   useFindAndModify: false,
-   useCreateIndex: true,
- }
-)
-
+const PORT = process.env.PORT || 3000
 app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`))
