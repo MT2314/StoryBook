@@ -20,7 +20,7 @@ const passport = require('passport');
 const connectDB = require('./config/db')
 
 // Load config
-dotenv.config({ path: './config/config.env'})
+dotenv.config({ path: './config/config.env' })
 
 //  Passport config
 require('./config/passport')(passport);
@@ -31,33 +31,57 @@ connectDB()
 const app = express()
 
 //Body parser
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 
 // Logging with morgan
-if(process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'))
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'))
 }
 
+
+//Handlebars Helpers
+const { formatDate, stripTags, truncate, editIcon, select } = require('./helpers/hbs')
+
+
 // Handlebars  -- Template Engine
-app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
+app.engine
+  ('.hbs',
+    exphbs({
+      helpers: {
+        formatDate,
+        stripTags,
+        truncate,
+        editIcon,
+        select
+      },
+      defaultLayout: 'main',
+      extname: '.hbs'
+    })
+  );
 app.set('view engine', '.hbs');
 
 // Sessions
 app.use(session({
-    secret: 'keyboard cat',
-    // resvae wont save session if nothing is modified
-    resave: false,
-    //dont create a session unles something is stored
-    saveUninitialized: false,
-    // Stores login in MongoDB so user stays logged in even during server changes
-    store:new MongoStore({ mongooseConnection: mongoose.connection})
-  }))
+  secret: 'keyboard cat',
+  // resvae wont save session if nothing is modified
+  resave: false,
+  //dont create a session unles something is stored
+  saveUninitialized: false,
+  // Stores login in MongoDB so user stays logged in even during server changes
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
+}))
 
 //Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+//Set gloabal var
+app.use(function(req,res,next){
+  res.locals.user = req.user || null
+  next()
+});
 
 //Static folder
 // __dirname is direct path to current directory then go to public
