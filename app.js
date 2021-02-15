@@ -26,7 +26,7 @@ const connectDB = require('./config/db')
 const PORT = process.env.PORT || 3000
 
 // Load config
-// dotenv.config({ path: './config/config.env' })
+dotenv.config({ path: './config/config.env' })
 
 //  Passport config
 require('./config/passport')(passport);
