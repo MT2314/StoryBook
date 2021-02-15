@@ -28,7 +28,7 @@
 
 ###### Create/View/Edit/Delete Stories
 > <img src= "/public/Images/addStory.jpg" alt="Burger Order System Screenshot" width="400"/>
-
+> <img src= "/public/Images/viewStory.jpg" alt="Burger Order System Screenshot" width="400"/>
     
 </br>
 </br>
@@ -42,7 +42,7 @@
 
 
 ### Technologies
-HTML , CSS , Materialize, Javascript , MongoDB , Node , Express, Handlebars, Google OAuth
+HTML , CSS , Materialize, Javascript , MongoDB , Node , Express, Handlebars, Google OAuth, Passport
 
 ### Usage Guide
 ---
@@ -54,14 +54,8 @@ Navigate to the link. Your data will be saved in MongoDB
 ### Contributing
 ---
 > :school: 
-**University of Toronto Continuing Educationg
-Full Stack Flex Program** 
+**Traversy Media | Web Development & Programming Tutorials** 
 :school:
-
-:heart: 
-*Students and Instructors At the UFT-FSF-2020-2021*
-:heart:
-
 
 ### License
 ---
